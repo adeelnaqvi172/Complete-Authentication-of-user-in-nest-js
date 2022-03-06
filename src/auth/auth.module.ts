@@ -1,0 +1,14 @@
+import { Module } from '@nestjs/common';
+import { AuthService } from './auth.service';
+import { JwtModule } from '@nestjs/jwt';
+
+@Module({
+  imports: [
+    JwtModule.register({
+      secret: process.env.JWT_SECRET,
+      signOptions: { expiresIn: '1800s' }, // time for JWT token afer 30 minute JWT token will be expired
+    }),
+  ],
+  providers: [AuthService],
+})
+export class AuthModule {}
